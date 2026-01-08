@@ -44,7 +44,8 @@ app.get('/*', async (req, res) => {
     const url = req.path.slice(1) || '/';
 
     const vars = {
-        headers: req.headers
+        headers: req.headers,
+        query: req.query
     };
 
     let page;
