@@ -112,7 +112,11 @@ module.exports = {
             url: {
                 $regex: regex
             }
-        }).limit(50);
+        })
+            .sort({
+                url: 1
+            })
+            .limit(50);
 
         const result = pages.filter(a => a.domain === selectedDomain).slice(0, 25);
         if(result.length < 25) result.push(...pages.filter(a => a.domain !== selectedDomain && (interaction.teamOwner || interaction.dbUser.allowedDomains.includes(a.domain))).slice(0, 25 - result.length));
