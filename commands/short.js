@@ -39,8 +39,14 @@ module.exports = {
             ephemeral: true
         });
 
+        const domain = interaction.dbUser.selectedDomain || Domain[0].domain;
+        if(!(interaction.teamOwner || interaction.dbUser.allowedDomains.includes(domain)) || !Domain.some(d => d.domain === domain)) return interaction.reply({
+            content: '사용할 수 없는 도메인입니다.',
+            ephemeral: true
+        });
+
         const page = new Page({
-            domain: interaction.dbUser.selectedDomain || Domain[0].domain,
+            domain,
             url: randomstring.generate(main.getOwnerID().includes(interaction.user.id) ? 4 : 8),
             flows: [{
                 condition: {
