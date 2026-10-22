@@ -10,7 +10,7 @@ const Log = require('../../schemas/log');
 
 const app = express.Router();
 
-app.get('/*/info', async (req, res) => {
+app.get('/*link/info', async (req, res) => {
     if(!req.isAuthenticated()) return res.redirect(`/login?redirect_url=${encodeURIComponent(req.originalUrl)}`);
 
     const user = await User.findOne({
@@ -40,7 +40,7 @@ app.get('/*/info', async (req, res) => {
     res.end(JSON.stringify(page, null, 2));
 });
 
-app.get('/*', async (req, res) => {
+app.get('/{*link}', async (req, res) => {
     const url = req.path.slice(1) || '/';
 
     const vars = {
