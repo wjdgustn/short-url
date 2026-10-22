@@ -8,7 +8,7 @@ const {
     TextInputBuilder,
     TextInputStyle
 } = require('discord.js');
-const parseDuration = require('parse-duration');
+const ms = require('ms');
 
 const utils = require('../../utils');
 const flow = require('../../flow');
@@ -280,7 +280,7 @@ module.exports.handleMessage = async (pageInfo, message, interaction) => {
                     const expiresAtDate = new Date(expiresAtStr);
                     if(!isNaN(expiresAtDate)) expiresAt = expiresAtDate.getTime();
                     else {
-                        expiresAt = parseDuration(expiresAtStr);
+                        expiresAt = ms(expiresAtStr);
                         if(expiresAt) expiresAt += Date.now();
                     }
                 }
